@@ -10,10 +10,7 @@ package org.antframework.filter;
 
 import org.antframework.filter.core.DefaultFilterChain;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Consumer;
 
@@ -23,6 +20,13 @@ import java.util.function.Consumer;
 public class FilterHub {
     // 类型-过滤器集合map
     private final Map<Object, List<Filter<?>>> typeFilterses = new ConcurrentHashMap<>();
+
+    /**
+     * 获取所有过滤器类型
+     */
+    public Set<Object> getTypes() {
+        return Collections.unmodifiableSet(new HashSet<>(typeFilterses.keySet()));
+    }
 
     /**
      * 新增过滤器
