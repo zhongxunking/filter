@@ -27,6 +27,7 @@ public interface Filter<T> {
      *
      * @param context 上下文
      * @param chain   过滤器链
+     * @throws Throwable 异常
      */
-    void doFilter(T context, FilterChain<T> chain);
+    void doFilter(T context, FilterChain<T> chain) throws Throwable;
 }

@@ -28,7 +28,7 @@ public class DefaultFilterChain<T> implements FilterChain<T> {
     private int index = 0;
 
     @Override
-    public synchronized void doFilter(T context) {
+    public synchronized void doFilter(T context) throws Throwable {
         if (index < filters.size()) {
             Filter<T> filter = filters.get(index);
             index++;
