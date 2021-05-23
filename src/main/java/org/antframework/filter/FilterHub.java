@@ -1,4 +1,4 @@
-/* 
+/*
  * 作者：钟勋 (email:zhongxunking@163.com)
  */
 
@@ -58,6 +58,10 @@ public class FilterHub {
      */
     public void removeFilter(Filter<?> filter) {
         typeFilterses.computeIfPresent(filter.getType(), (type, filters) -> {
+            if (!filters.contains(filter)) {
+                return filters;
+            }
+            filters = new ArrayList<>(filters);
             filters.remove(filter);
             if (filters.isEmpty()) {
                 filters = null;
@@ -77,7 +81,7 @@ public class FilterHub {
     public <T> FilterChain<T> newFilterChain(Object type, Consumer<T> target) {
         List<Filter<?>> filters = typeFilterses.get(type);
         if (filters == null) {
-            filters = new ArrayList<>(0);
+            filters = Collections.emptyList();
         }
         return new DefaultFilterChain(filters, target);
     }
