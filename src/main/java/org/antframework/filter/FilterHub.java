@@ -71,6 +71,23 @@ public class FilterHub {
     }
 
     /**
+     * 获取过滤器
+     *
+     * @param type 类型
+     * @param <T>  上下文类型
+     * @return 相同类型的过滤器
+     */
+    public <T> List<Filter<T>> getFilters(Object type) {
+        List<Filter<?>> filters = typeFilterses.get(type);
+        if (filters == null) {
+            filters = Collections.emptyList();
+        } else {
+            filters = Collections.unmodifiableList(filters);
+        }
+        return (List) filters;
+    }
+
+    /**
      * 新建过滤器链
      *
      * @param type   类型
@@ -79,10 +96,6 @@ public class FilterHub {
      * @return 过滤器链
      */
     public <T> FilterChain<T> newFilterChain(Object type, Consumer<T> target) {
-        List<Filter<?>> filters = typeFilterses.get(type);
-        if (filters == null) {
-            filters = Collections.emptyList();
-        }
-        return new DefaultFilterChain(filters, target);
+        return new DefaultFilterChain<>(getFilters(type), target);
     }
 }
