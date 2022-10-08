@@ -9,7 +9,7 @@
 
     <groupId>org.antframework.filter</groupId>
     <artifactId>filter</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
 
     <name>filter</name>
     <description>过滤器</description>
